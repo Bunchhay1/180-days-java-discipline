@@ -27,6 +27,10 @@ public class FundsTransferService {
         accountRepository.save(receiver);
 
         System.out.println("[SPRING SERVICE ] Transfer completed safely. database synced. ");
-
+    }
+    public BankAccount getAcountDetial(String accountId){
+        System.out.println("[SPRING SERVICE] Fetching account details for:" + accountId);
+        return accountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Account not found:" + accountId));
     }
 }
