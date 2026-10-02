@@ -1,6 +1,7 @@
 package com.titancore.titanbankapi.controller;
 
 import com.titancore.titanbankapi.domain.BankAccount;
+import com.titancore.titanbankapi.dto.AccountResponse;
 import com.titancore.titanbankapi.dto.TransFerRequest;
 import com.titancore.titanbankapi.service.FundsTransferService;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +24,11 @@ public class BankAccountController {
         );
 
         return "Transaction Successful: Transferred $" + request.getAmount() + " to " + request.getReceiverId();
+    }
+    @GetMapping("/{id}")
+    public AccountResponse checkBalance(@PathVariable String id){
+        System.out.println("[API LAYER] Receiver balance inquiry for accouint:" + id);
+        BankAccount account = transferService.getAcountDetial(id);
+        return new AccountResponse(account.getAccountId(), account.getBalance());
     }
 }
