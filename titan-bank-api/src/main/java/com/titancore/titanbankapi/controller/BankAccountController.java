@@ -2,8 +2,9 @@ package com.titancore.titanbankapi.controller;
 
 import com.titancore.titanbankapi.domain.BankAccount;
 import com.titancore.titanbankapi.dto.AccountResponse;
-import com.titancore.titanbankapi.dto.TransFerRequest;
+import com.titancore.titanbankapi.dto.TransferRequest;
 import com.titancore.titanbankapi.service.FundsTransferService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,7 +15,7 @@ public class BankAccountController {
         this.transferService = transferService;
     }
     @PostMapping("/transfer")
-    public String performTransfer(@RequestBody TransFerRequest request){
+    public String performTransfer(@Valid  @RequestBody TransferRequest request){
         System.out.println("\n[API LAYER] Receiver transfer request from Mobile App....");
 
         transferService.transfer(
