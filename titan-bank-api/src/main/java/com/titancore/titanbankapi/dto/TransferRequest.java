@@ -1,15 +1,22 @@
 package com.titancore.titanbankapi.dto;
 
 import java.math.BigDecimal;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
+public class TransferRequest {
 
-public class TransFerRequest {
-
+    @NotBlank(message = "Sender ID cannot be empty!")
     private String senderId;
+    @NotBlank(message = "Sender ID cannot be empty!")
     private String receiverId;
+    @Positive(message = "Transfer amount must be strictly greater than zero!")
     private BigDecimal amount;
 
-    public TransFerRequest() {}
-    public TransFerRequest(String senderId, String receiverId, BigDecimal amount ){
+
+
+    public TransferRequest() {}
+    public TransferRequest(String senderId, String receiverId, BigDecimal amount ){
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.amount = amount;
