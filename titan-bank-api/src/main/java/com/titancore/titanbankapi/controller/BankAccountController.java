@@ -6,6 +6,10 @@ import com.titancore.titanbankapi.dto.TransferRequest;
 import com.titancore.titanbankapi.service.FundsTransferService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
+import
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/accounts")
@@ -31,5 +35,9 @@ public class BankAccountController {
         System.out.println("[API LAYER] Receiver balance inquiry for accouint:" + id);
         BankAccount account = transferService.getAcountDetial(id);
         return new AccountResponse(account.getAccountId(), account.getBalance());
+    }
+    @GetMapping("/search")
+    public List<AccountResponse> searchAccounts(@RequestParam BigDecimal minBalance){
+        log.info("[API LAYER] Searching for accounts >" + $ + minBalance);
     }
 }
