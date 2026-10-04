@@ -1,0 +1,26 @@
+### 1. Test Fail-Fast Validation (Negative Amount)
+POST http://localhost:8080/api/v1/accounts
+Content-Type: application/json
+
+{
+  "accountNumber": "123456789",
+  "initialDeposit": -50.00
+}
+
+### 2. Test Successful Account Creation
+POST http://localhost:8080/api/v1/accounts
+Content-Type: application/json
+
+{
+  "accountNumber": "987654321",
+  "initialDeposit": 1000.50
+}
+
+### 3. Test Conflict (Duplicate Account)
+POST http://localhost:8080/api/v1/accounts
+Content-Type: application/json
+
+{
+  "accountNumber": "987654321",
+  "initialDeposit": 200.00
+}
