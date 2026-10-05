@@ -9,6 +9,10 @@ import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class FundsTransferService {
@@ -48,8 +52,9 @@ public class FundsTransferService {
         return accountRepository.findById(accountId)
                 .orElseThrow(() -> new RuntimeException("Account not found:" + accountId));
     }
-    public List<BankAccount> getHighValueAccounts(BigDecimal minimumBalance){
-        log.info("Investigating account with balance greater then: ${}", minimumBalance);
-        return accountRepository.findByBalanceGreaterThan(minimumBalance);
+    public Page<BankAccount> getHighValueAccounts(BigDecimal minimumBalance, int pageNumber, int pageSize){
+        log.info("Investigating account > ${} | Page: {} | Size:  ${}", minimumBalance, pageNumber);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("balance").descending());
+        return accountRepository.findByBalanceGreaterThan(minimumBalance, pageable);
     }
 }
