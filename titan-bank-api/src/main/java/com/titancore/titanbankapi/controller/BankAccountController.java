@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
-
+import org.springframework.data.domain.Page;
 import java.util.stream.Collectors;
 
 
@@ -38,12 +38,11 @@ public class BankAccountController {
         return new AccountResponse(account.getAccountId(), account.getBalance());
     }
     @GetMapping("/search")
-    public List<AccountResponse> searchAccounts(@RequestParam BigDecimal minBalance){
-        System.out.println("[API LAYER] Searching for accounts > + $" + minBalance);
+    public Page<AccountResponse> searchAccounts(@RequestParam(name = "minBalance") BigDecimal minBalance ,@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size",defaultValue = "10") int size){
+        System.out.println("[API LAYER] Searching for accounts > + $" + minBalance + " | Page:" + page);
 
-        List<BankAccount> accounts = transferService.getHighValueAccounts(minBalance);
-        return accounts.stream()
-                .map(acc -> new AccountResponse(acc.getAccountId(), acc.getBalance()))
-                .collect(Collectors.toList());
+        Page<BankAccount> accountsPage = transferService.getHighValueAccounts(minBalance, page, size);
+        return accountsPage.map(acc -> new AccountResponse(acc.getAccountId(), acc.getBalance()));
+
     }
 }
