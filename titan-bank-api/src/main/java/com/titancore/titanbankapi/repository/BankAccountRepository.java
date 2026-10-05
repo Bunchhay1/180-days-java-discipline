@@ -2,6 +2,8 @@ package com.titancore.titanbankapi.repository;
 
 
 import com.titancore.titanbankapi.domain.BankAccount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +13,8 @@ import java.util.List;
 @Repository
 public interface BankAccountRepository extends JpaRepository<BankAccount, String>{
 
-    List<BankAccount> findByBalanceGreaterThan(BigDecimal amount);
+    Page<BankAccount> findByBalanceGreaterThan(BigDecimal amount, Pageable pageable);
+
 
 
 }
