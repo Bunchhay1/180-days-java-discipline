@@ -1,0 +1,6 @@
+FROM eclipse-temurin:21-jre-alpine
+LABEL maintainer="Titan Core Banking"
+WORKDIR /app
+COPY target/titan-bank-api-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java" , "-jar" , "aap.jar"]
