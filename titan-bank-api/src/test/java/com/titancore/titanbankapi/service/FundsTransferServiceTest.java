@@ -26,8 +26,8 @@ public class FundsTransferServiceTest {
     public void shouldTransferSuccessfully(){
         BankAccount sender = new BankAccount("ACC-001", new BigDecimal("1000.00"));
         BankAccount receiver = new BankAccount("ACC-002", new BigDecimal("500.00"));
-        when(accountRepository.findById("ACC-001")).thenReturn(Optional.of(sender));
-        when(accountRepository.findById("ACC-002")).thenReturn(Optional.of(receiver));
+        when(accountRepository.findByIdForUpdate("ACC-001")).thenReturn(Optional.of(sender));
+        when(accountRepository.findByIdForUpdate("ACC-002")).thenReturn(Optional.of(receiver));
         transferService.transfer("ACC-001", "ACC-002", new BigDecimal("200.00"));
         assertEquals(new BigDecimal("800.00"), sender.getBalance());
         assertEquals(new BigDecimal("700.00"), receiver.getBalance());
@@ -38,8 +38,8 @@ public class FundsTransferServiceTest {
         BankAccount sender = new BankAccount("ACC-001", new BigDecimal("100.00"));
         BankAccount receiver = new BankAccount("ACC-002", new BigDecimal("500.00"));
 
-        when(accountRepository.findById("ACC-001")).thenReturn(Optional.of(sender));
-        when(accountRepository.findById("ACC-002")).thenReturn(Optional.of(receiver));
+        when(accountRepository.findByIdForUpdate("ACC-001")).thenReturn(Optional.of(sender));
+        when(accountRepository.findByIdForUpdate("ACC-002")).thenReturn(Optional.of(receiver));
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             transferService.transfer("ACC-001", "ACC-002", new BigDecimal("500.00"));
