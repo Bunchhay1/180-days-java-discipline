@@ -1,13 +1,1 @@
-server:
-  port: 8080
-
-spring:
-  datasource:
-    # ប្តូរពី 192.168.0.120 មកជា localhost
-    url: jdbc:postgresql://localhost:5432/codingdb
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+server:  port: 8080spring:  application:    name: titan-bank-api  datasource:    # ប្តូរពី 192.168.0.120 មកជា localhost    url: jdbc:postgresql://localhost:5432/codingdb    username: postgres    password: postgres  jpa:    hibernate:      ddl-auto: update    show-sql: true    eureka:      client:        serviceUrl:          defaultZone: http:localhost:8761/eureka/
