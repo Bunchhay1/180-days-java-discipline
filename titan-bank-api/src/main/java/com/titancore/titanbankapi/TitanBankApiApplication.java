@@ -9,9 +9,15 @@ import com.titancore.titanbankapi.service.FundsTransferService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import java.math.BigDecimal;
 
+
+@EnableJpaAuditing
 @SpringBootApplication
+@EnableFeignClients // it is for manager call api
 public class TitanBankApiApplication implements CommandLineRunner {
 
     private final BankAccountRepository repository;
