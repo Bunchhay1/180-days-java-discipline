@@ -1,0 +1,23 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: titan-api-gateway
+    cloud:
+      gateway:
+        routes:
+          # way to go bank API
+        -id : bank-service-route
+          # lb = Load Balancer ( use Eureka for find TITAN-BANK-API)
+        uri: lb://TITAN-BANK-API
+        predicates:
+          - Path=/api/bank/**
+
+
+# point client where is api
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
