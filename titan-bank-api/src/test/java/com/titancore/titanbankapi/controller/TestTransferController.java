@@ -1,6 +1,7 @@
 package com.titancore.titanbankapi.controller;
 
-import com.titancore.titanbankapi.client.NotificationClient;
+
+import com.titancore.titanbankapi.service.TransferService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,18 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/bank")
 public class TestTransferController {
 
-    private final NotificationClient notificationClient;
+    private final TransferService transferService;
 
-    public TestTransferController(NotificationClient notificationClient) {
-        this.notificationClient = notificationClient;
+    public TestTransferController(TransferService transferService) {
+        this.transferService = transferService;
     }
-
-    // immutability testing readiness
     @GetMapping("/transfer-test")
-    public String testTransfer() {
-        String bankLogic = "Transfer $500 Success.";
-        String smsResponse = notificationClient.sentSms("0123456789", "You transfer $500 Success.");
-        return bankLogic + " | " + smsResponse;
+    public String doTransferTest(){
+        return transferService.executeTransfer("ACC-1001", 500);
     }
-
 }
