@@ -1,6 +1,7 @@
-package com.titancore.springbootcodesenior.config.repository;
+package com.titancore.springbootcodesenior.repository;
 
-import com.titan.core.entity.Account;
+
+import com.titancore.springbootcodesenior.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
